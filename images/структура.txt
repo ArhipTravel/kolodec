@@ -1,0 +1,47 @@
+images/
+├── favicon/                 # Иконки сайта
+│   ├── favicon.ico
+│   └── apple-touch-icon.png
+│
+├── logo/                    # Логотип и элементы брендинга
+│   └── logo-old-well.svg    # Векторный логотип «Старый колодец»
+│
+├── hero/                    # Изображения для главного экрана
+│   └── hero-main.jpg        # Основной фон (1 шт.)
+│
+├── about/                   # Изображения для раздела «О доме»
+│   └── house-exterior.jpg   # Фасад гостевого дома
+│
+├── rooms/                   # Фотографии номеров (4 категории)
+│   ├── room-econom.jpg
+│   ├── room-standard.jpg
+│   ├── room-family.jpg
+│   └── room-lux.jpg
+│
+├── gallery/                 # Галерея (8 фотографий интерьера/территории)
+│   ├── gallery-01.jpg       # Вид на двор с колодцем
+│   ├── gallery-02.jpg       # Зона отдыха с мангалом
+│   ├── gallery-03.jpg       # Бассейн
+│   ├── gallery-04.jpg       # Общий вид гостевого дома
+│   ├── gallery-05.jpg       # Интерьер холла
+│   ├── gallery-06.jpg       # Терраса
+│   ├── gallery-07.jpg       # Вид на горы
+│   └── gallery-08.jpg       # Пляж Архипо-Осиповки (рядом)
+│
+├── icons/                   # Иконки для преимуществ и UI (опционально)
+│   ├── wifi.svg
+│   ├── parking.svg
+│   └── pool.svg
+│
+└── social/                  # Изображения для Open Graph / соцсетей
+    └── og-image.jpg         # Превью при шеринге ссылки
+
+
+    images/
+  hero/hero-main.jpg
+  about/house-exterior.jpg
+  rooms/room-econom.jpg
+  rooms/room-standard.jpg
+  rooms/room-family.jpg
+  rooms/room-lux.jpg
+  gallery/gallery-01.jpg ... gallery-08.jpg
