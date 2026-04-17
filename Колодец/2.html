@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Старый колодец · Гостевой дом в Архипо-Осиповке</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- EmailJS (для отправки формы) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fefaf5;
+            color: #2e241f;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 250, 240, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            z-index: 1000;
+            padding: 14px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: #b76e3c;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #3a2c24;
+            letter-spacing: 1px;
+        }
+        .logo-text span {
+            color: #b76e3c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #3a2c24;
+            transition: color 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #b76e3c;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #3a2c24;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(105deg, #f7ede3 0%, #f2e3d5 100%);
+            padding-top: 80px;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #2e241f;
+        }
+        .hero-content h1 i {
+            color: #b76e3c;
+            font-size: 3rem;
+            margin-right: 8px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            color: #4f3e33;
+        }
+        .btn {
+            display: inline-block;
+            background: #b76e3c;
+            color: white;
+            padding: 14px 34px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 6px 18px rgba(183, 110, 60, 0.25);
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #9a5a30;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(183, 110, 60, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #3a2c24;
+            box-shadow: none;
+            border: 1.5px solid #b76e3c;
+            margin-left: 16px;
+        }
+        .btn-outline:hover {
+            background: #b76e3c;
+            color: white;
+        }
+        /* Локальное изображение hero */
+        .hero-image {
+            background: url('images/hero/hero-main1.webp') center/cover no-repeat;
+            border-radius: 40px 120px 40px 120px;
+            height: 480px;
+            box-shadow: 20px 20px 40px rgba(0,0,0,0.08);
+            border: 4px solid rgba(255,255,240,0.7);
+        }
+
+        /* sections */
+        section {
+            padding: 100px 0;
+        }
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background: #b76e3c;
+            border-radius: 4px;
+        }
+        .section-sub {
+            color: #6b4f3e;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        /* about */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-text p {
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .feature-item {
+            text-align: center;
+            background: white;
+            padding: 24px 12px;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+            border: 1px solid #ede0d4;
+        }
+        .feature-item i {
+            font-size: 36px;
+            color: #b76e3c;
+            margin-bottom: 16px;
+        }
+        /* Локальное изображение about */
+        .about-image {
+            background: url('images/about/house-exterior.jpg') center/cover;
+            border-radius: 80px 20px 80px 20px;
+            height: 400px;
+            box-shadow: 20px 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* rooms */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 24px;
+        }
+        .room-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            transition: transform 0.25s;
+            border: 1px solid #ede0d4;
+        }
+        .room-card:hover {
+            transform: translateY(-8px);
+        }
+        .room-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .room-info {
+            padding: 24px 18px 28px;
+        }
+        .room-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 6px;
+        }
+        .price {
+            font-weight: 700;
+            color: #b76e3c;
+            font-size: 1.3rem;
+            margin: 12px 0 10px;
+        }
+        .room-info p {
+            color: #5a4a3f;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .room-btn {
+            background: none;
+            border: 1.5px solid #b76e3c;
+            color: #b76e3c;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .room-btn:hover {
+            background: #b76e3c;
+            color: white;
+        }
+
+        /* gallery — все локальные изображения */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-auto-rows: 220px;
+            gap: 18px;
+        }
+        .gallery-item {
+            border-radius: 24px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+            border: 2px solid white;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        /* Локальные пути к галерее */
+        .gallery-item:nth-child(1) { background-image: url('images/gallery/gallery-01.jpg'); }
+        .gallery-item:nth-child(2) { background-image: url('images/gallery/gallery-02.jpg'); }
+        .gallery-item:nth-child(3) { background-image: url('images/gallery/gallery-03.jpg'); }
+        .gallery-item:nth-child(4) { background-image: url('images/gallery/gallery-04.jpg'); }
+        .gallery-item:nth-child(5) { background-image: url('images/gallery/gallery-05.jpg'); }
+        .gallery-item:nth-child(6) { background-image: url('images/gallery/gallery-06.jpg'); }
+        .gallery-item:nth-child(7) { background-image: url('images/gallery/gallery-07.jpg'); }
+        .gallery-item:nth-child(8) { background-image: url('images/gallery/gallery-08.jpg'); }
+
+        /* booking + map */
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            border: 1px solid #f0e1d4;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e5d5c8;
+            border-radius: 40px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: #fffbf8;
+            transition: border 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #b76e3c;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            margin-top: 12px;
+        }
+        .form-message {
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        .map-container {
+            border-radius: 32px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 320px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* footer */
+        .footer {
+            background: #2e241f;
+            color: #e0d6ce;
+            padding: 40px 0;
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer .logo-text { color: #f0e0d2; }
+        .footer-contacts i { margin-right: 8px; color: #b76e3c; }
+
+        /* mobile nav */
+        @media (max-width: 900px) {
+            .rooms-grid { grid-template-columns: repeat(2,1fr); }
+            .gallery-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: #fffaf5;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 30px 0;
+                box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-radius: 0 0 30px 30px;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            .menu-toggle { display: block; }
+            .hero .container { grid-template-columns: 1fr; }
+            .hero-image { height: 300px; order: -1; }
+            .hero-content h1 { font-size: 2.6rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .booking-wrapper { grid-template-columns: 1fr; padding: 28px; }
+            .section-title { font-size: 2.2rem; }
+            .features { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .rooms-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .btn-outline { margin-left: 0; margin-top: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-water logo-icon"></i>
+                <div class="logo-text">Старый <span>колодец</span></div>
+            </div>
+            <nav>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">Главная</a>
+                    <a href="#about">О доме</a>
+                    <a href="#rooms">Номера</a>
+                    <a href="#gallery">Галерея</a>
+                    <a href="#booking">Бронь</a>
+                </div>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero / Главная -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1><i class="fas fa-tree"></i> Отдых у моря <br>в Архипо-Осиповке</h1>
+                    <p>Гостевой дом «Старый колодец» — уют, традиции и природа. Всего 10 минут до пляжа.</p>
+                    <div>
+                        <a href="#booking" class="btn">Забронировать</a>
+                        <a href="#about" class="btn btn-outline">Узнать больше</a>
+                    </div>
+                </div>
+                <div class="hero-image"></div>
+            </div>
+        </section>
+
+        <!-- О гостевом доме -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">Дом с историей</h2>
+                <div class="section-sub">Семейный уют в сердце курорта</div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>«Старый колодец» — это не просто гостевой дом, а место, где время течёт по‑особенному. Мы находимся в тихом районе Архипо-Осиповки, в окружении реликтовых сосен и гор. До центрального пляжа — 10 минут пешком, до аквапарка и дельфинария — 5 минут на машине.</p>
+                        <p>Гостевой дом построен в 2008 году и с тех пор мы принимаем гостей как родных. Во дворе — настоящий колодец с чистейшей водой, мангальная зона и детская площадка.</p>
+                        <div class="features">
+                            <div class="feature-item"><i class="fas fa-wifi"></i> Бесплатный Wi-Fi</div>
+                            <div class="feature-item"><i class="fas fa-parking"></i> Парковка</div>
+                            <div class="feature-item"><i class="fas fa-swimmer"></i> Бассейн (сезонный)</div>
+                        </div>
+                    </div>
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Номера (4 варианта) с локальными изображениями -->
+        <section id="rooms">
+            <div class="container">
+                <h2 class="section-title">Наши номера</h2>
+                <div class="section-sub">4 категории для любого путешествия</div>
+                <div class="rooms-grid">
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('images/rooms/room-econom.jpg');"></div>
+                        <div class="room-info">
+                            <h3>Эконом</h3>
+                            <div class="price">от 2 500 ₽</div>
+                            <p>Уютный номер с двуспальной кроватью, кондиционер, душ, TV.</p>
+                            <button class="room-btn" data-room="Эконом">Забронировать</button>
+                        </div>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('images/rooms/room-standard.jpg');"></div>
+                        <div class="room-info">
+                            <h3>Стандарт</h3>
+                            <div class="price">от 3 800 ₽</div>
+                            <p>Просторный номер, две кровати, балкон с видом на горы, холодильник.</p>
+                            <button class="room-btn" data-room="Стандарт">Забронировать</button>
+                        </div>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('images/rooms/room-family.jpg');"></div>
+                        <div class="room-info">
+                            <h3>Семейный</h3>
+                            <div class="price">от 5 200 ₽</div>
+                            <p>Две комнаты, большая двуспальная + две односпальные, мини-кухня.</p>
+                            <button class="room-btn" data-room="Семейный">Забронировать</button>
+                        </div>
+                    </div>
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('images/rooms/room-lux.jpg');"></div>
+                        <div class="room-info">
+                            <h3>Люкс</h3>
+                            <div class="price">от 7 500 ₽</div>
+                            <p>Панорамные окна, собственная терраса, джакузи, халаты.</p>
+                            <button class="room-btn" data-room="Люкс">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея (использует локальные изображения) -->
+        <section id="gallery">
+            <div class="container">
+                <h2 class="section-title">Галерея</h2>
+                <div class="section-sub">Атмосфера «Старого колодца»</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div><div class="gallery-item"></div>
+                    <div class="gallery-item"></div><div class="gallery-item"></div>
+                    <div class="gallery-item"></div><div class="gallery-item"></div>
+                    <div class="gallery-item"></div><div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Бронирование + карта -->
+        <section id="booking">
+            <div class="container">
+                <h2 class="section-title">Забронировать отдых</h2>
+                <div class="section-sub">Оставьте заявку — мы перезвоним через 5 минут</div>
+                <div class="booking-wrapper">
+                    <div class="booking-form">
+                        <form id="bookingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Имя</label>
+                                    <input type="text" class="form-control" name="user_name" placeholder="Алексей" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Телефон</label>
+                                    <input type="tel" class="form-control" name="user_phone" placeholder="+7 900 000-00-00" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="user_email" placeholder="mail@example.com" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Заезд</label>
+                                    <input type="date" class="form-control" name="checkin" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Выезд</label>
+                                    <input type="date" class="form-control" name="checkout" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Гостей</label>
+                                    <select class="form-control" name="guests">
+                                        <option>1 взрослый</option><option>2 взрослых</option><option>3 взрослых</option><option>2+1 ребёнок</option><option>2+2 детей</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Тип номера</label>
+                                    <select class="form-control" name="room_type" id="roomSelect">
+                                        <option>Эконом</option><option>Стандарт</option><option>Семейный</option><option>Люкс</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Комментарий</label>
+                                <textarea class="form-control" name="message" rows="2" placeholder="Пожелания..."></textarea>
+                            </div>
+                            <button type="submit" class="btn submit-btn">Отправить заявку</button>
+                            <div id="formFeedback" class="form-message"></div>
+                        </form>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://yandex.ru/map-widget/v1/?ll=38.535%2C44.368&z=14&pt=38.535,44.368&lang=ru_RU" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <p style="margin-top: 24px; text-align: right;"><i class="fas fa-map-marker-alt"></i> Архипо-Осиповка, ул. Колодезная, 12</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-water logo-icon"></i>
+                <div class="logo-text">Старый колодец</div>
+            </div>
+            <div class="footer-contacts">
+                <i class="fas fa-phone-alt"></i> +7 (918) 123-45-67 <br>
+                <i class="far fa-envelope"></i> oldkolodets@bk.ru
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function(){
+            "use strict";
+
+            // ---------- mobile menu ----------
+            const toggleBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // ---------- кнопки номеров ----------
+            const roomBtns = document.querySelectorAll('.room-btn');
+            const roomSelect = document.getElementById('roomSelect');
+            roomBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const room = this.dataset.room;
+                    if (roomSelect) {
+                        roomSelect.value = room;
+                    }
+                    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // ---------- EmailJS (замените ключи на свои) ----------
+            (function() {
+                emailjs.init("YOUR_PUBLIC_KEY"); // ⚠️ замените на ваш Public Key
+            })();
+
+            const form = document.getElementById('bookingForm');
+            const feedback = document.getElementById('formFeedback');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const phone = form.user_phone.value.trim();
+                const email = form.user_email.value.trim();
+                if (!phone || !email) {
+                    feedback.innerHTML = '<span style="color:#c0392b;">Пожалуйста, заполните телефон и email</span>';
+                    return;
+                }
+
+                feedback.innerHTML = '<span style="color:#b76e3c;">Отправляем запрос...</span>';
+
+                const templateParams = {
+                    user_name: form.user_name.value,
+                    user_phone: form.user_phone.value,
+                    user_email: form.user_email.value,
+                    checkin: form.checkin.value,
+                    checkout: form.checkout.value,
+                    guests: form.guests.value,
+                    room_type: form.room_type.value,
+                    message: form.message.value || '—'
+                };
+
+                // ⚠️ Замените SERVICE_ID и TEMPLATE_ID на свои
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                    .then(function(response) {
+                        feedback.innerHTML = '<span style="color:#2e7d32;">✅ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</span>';
+                        form.reset();
+                    }, function(error) {
+                        feedback.innerHTML = '<span style="color:#c0392b;">❌ Ошибка отправки. Позвоните нам или попробуйте позже.</span>';
+                        console.error('EmailJS error:', error);
+                    });
+            });
+
+            // даты по умолчанию
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const formatDate = (d) => d.toISOString().split('T')[0];
+            const checkinInput = document.querySelector('input[name="checkin"]');
+            const checkoutInput = document.querySelector('input[name="checkout"]');
+            if (checkinInput) checkinInput.value = formatDate(today);
+            if (checkoutInput) checkoutInput.value = formatDate(tomorrow);
+        })();
+    </script>
+</body>
+</html>
